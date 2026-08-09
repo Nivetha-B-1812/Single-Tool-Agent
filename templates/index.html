@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Single-Tool AI Agent</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <div class="logo-bot">🤖</div>
+
+            <div>
+                <h2>Single-Tool</h2>
+                <span>AI Agent</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-item active">
+                🏠
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-item"
+                    onclick="focusCalculator()">
+                🧮
+                <span>Calculator Tool</span>
+            </button>
+
+            <button class="nav-item"
+                    onclick="showHistory()">
+                📋
+                <span>History</span>
+            </button>
+
+            <button class="nav-item"
+                    onclick="showFavorites()">
+                ⭐
+                <span>Favorites</span>
+            </button>
+
+            <button class="nav-item">
+                📊
+                <span>Statistics</span>
+            </button>
+
+            <button class="nav-item">
+                ℹ️
+                <span>About Agent</span>
+            </button>
+
+            <button class="nav-item">
+                ⚙️
+                <span>Settings</span>
+            </button>
+
+            <button class="nav-item">
+                ❓
+                <span>Help & Support</span>
+            </button>
+
+        </nav>
+
+        <div class="pro-card">
+
+            <div class="crown">👑</div>
+
+            <h3>Upgrade to Pro</h3>
+
+            <p>
+                Unlock more tools and advanced features.
+            </p>
+
+            <button>
+                Upgrade Now
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <button class="menu-btn"
+                    onclick="toggleSidebar()">
+                ☰
+            </button>
+
+            <div class="online">
+                <span></span>
+                Agent Online
+            </div>
+
+            <div class="top-right">
+               <span id="time">08:00 PM</span>
+
+              <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">
+                       🌙
+              </button>
+
+               <div class="mini-bot">🤖</div>
+           </div>
+
+        </header>
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-title">
+                    👋
+                    <span>Hello! I'm Your AI Agent</span>
+                </div>
+
+                <p>
+                    I can help you solve calculations instantly
+                    using my powerful Calculator Tool.
+                </p>
+
+                <div class="hero-stats">
+
+                    <div class="stat-box">
+                        <span>🧮</span>
+                        <div>
+                            <small>Active Tool</small>
+                            <strong>Calculator</strong>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <span>⚡</span>
+                        <div>
+                            <small>Response Time</small>
+                            <strong>~0.3s</strong>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <span>✓</span>
+                        <div>
+                            <small>Accuracy</small>
+                            <strong>100%</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="big-robot">
+                🤖
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+
+        <section class="features">
+
+            <h2>✨ What I Can Do</h2>
+
+            <div class="feature-grid">
+
+                <div class="feature purple">
+                    <span>🧮</span>
+                    <h3>Calculate Expressions</h3>
+                    <p>
+                        Solve any arithmetic expression
+                        quickly and accurately.
+                    </p>
+                </div>
+
+                <div class="feature blue">
+                    <span>📊</span>
+                    <h3>Smart Evaluation</h3>
+                    <p>
+                        Understand BODMAS rules and
+                        complex expressions.
+                    </p>
+                </div>
+
+                <div class="feature green">
+                    <span>✓</span>
+                    <h3>Structured Output</h3>
+                    <p>
+                        Get clear, structured answers
+                        with details and status.
+                    </p>
+                </div>
+
+                <div class="feature orange">
+                    <span>🕐</span>
+                    <h3>History Tracking</h3>
+                    <p>
+                        Keep your calculations saved
+                        for easy access.
+                    </p>
+                </div>
+
+                <div class="feature pink">
+                    <span>⭐</span>
+                    <h3>Save Favorites</h3>
+                    <p>
+                        Mark important results as
+                        favorites for quick access.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CALCULATOR + RESULT ================= -->
+
+        <div class="work-grid">
+
+
+            <!-- CALCULATOR -->
+
+            <section class="calculator card"
+                     id="calculator">
+
+                <div class="section-title">
+
+                    <div>
+                        <span>🧮</span>
+                        <h2>Calculator Tool</h2>
+                    </div>
+
+                    <button class="small-btn"
+                            onclick="showExamples()">
+                        💡 Examples
+                    </button>
+
+                </div>
+
+                <p class="label">
+                    Enter any mathematical expression
+                </p>
+
+                <textarea
+                    id="question"
+                    placeholder="Type your calculation here..."
+                    rows="2"></textarea>
+
+
+                <div class="quick">
+
+                    <span>Quick Examples:</span>
+
+                    <button onclick="setExample('25*4')">
+                        25*4
+                    </button>
+
+                    <button onclick="setExample('100+200')">
+                        100+200
+                    </button>
+
+                    <button onclick="setExample('144/12')">
+                        144/12
+                    </button>
+
+                    <button onclick="setExample('(15+5)*2')">
+                        (15+5)*2
+                    </button>
+
+                    <button onclick="setExample('500-125')">
+                        500-125
+                    </button>
+
+                </div>
+
+
+                <button class="run-btn"
+                        id="runButton"
+                        onclick="askAgent()">
+
+                    🚀 Run Agent
+
+                </button>
+
+
+                <div class="tip">
+                    💡 <strong>Tip:</strong>
+                    Use +, -, *, /, (, ) and decimals.
+                    The agent follows BODMAS rules.
+                </div>
+
+            </section>
+
+
+            <!-- RESULT -->
+
+            <section class="result card"
+                     id="result">
+
+                <div class="result-heading">
+
+                    <div>
+                        <span>📄</span>
+                        <h2>Result</h2>
+                    </div>
+
+                    <span class="success">
+                        ✓ Success
+                    </span>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <small>Question</small>
+
+                    <strong id="resultQuestion">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <small>Tool Used</small>
+
+                    <strong id="resultTool">
+                        🧮 Calculator
+                    </strong>
+
+                </div>
+
+
+                <div class="answer">
+
+                    <small>Answer</small>
+
+                    <strong id="resultAnswer">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <small>Status</small>
+
+                    <strong class="green-text">
+                        🟢 success
+                    </strong>
+
+                </div>
+
+
+                <div class="result-row">
+
+                    <small>Response Time</small>
+
+                    <strong id="responseTime">
+                        ⚡ 0.28s
+                    </strong>
+
+                </div>
+
+
+                <button class="favorite-btn"
+                        onclick="saveFavorite()">
+
+                    ⭐ Add to Favorites
+
+                </button>
+
+            </section>
+
+        </div>
+
+
+        <!-- ================= HISTORY ================= -->
+
+        <section class="history card"
+                 id="history">
+
+            <div class="section-heading">
+
+                <div>
+                    <span>🕘</span>
+                    <h2>Calculation History</h2>
+                </div>
+
+                <button class="small-btn"
+                        onclick="clearHistory()">
+                    Clear
+                </button>
+
+            </div>
+
+            <div id="historyList">
+
+                <div class="empty">
+                    No calculations yet.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="statistics card">
+
+            <div class="section-heading">
+
+                <div>
+                    <span>📊</span>
+                    <h2>Statistics</h2>
+                </div>
+
+                <span class="session">
+                    This Session
+                </span>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="dashboard-stat purple-stat">
+
+                    <span>👥</span>
+
+                    <div>
+                        <small>Total Requests</small>
+                        <strong id="totalRequests">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-stat green-stat">
+
+                    <span>✓</span>
+
+                    <div>
+                        <small>Success Rate</small>
+                        <strong>
+                            100%
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-stat blue-stat">
+
+                    <span>⚡</span>
+
+                    <div>
+                        <small>Avg Response Time</small>
+                        <strong>
+                            0.31s
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-stat orange-stat">
+
+                    <span>⭐</span>
+
+                    <div>
+                        <small>Favorites</small>
+                        <strong id="favoriteCount">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HELP ================= -->
+
+        <section class="help">
+
+            <div class="help-robot">
+                🤖
+            </div>
+
+            <div class="help-text">
+
+                <h2>Need Help?</h2>
+
+                <p>
+                    I'm here to help you with your calculations.
+                    Feel free to ask me anything!
+                </p>
+
+            </div>
+
+            <div class="help-buttons">
+
+                <button onclick="showHelp()">
+                    ❓ How to use
+                </button>
+
+                <button onclick="showExamples()">
+                    📖 Examples
+                </button>
+
+                <button onclick="showSupport()">
+                    💬 Contact Support
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            © 2026 Single-Tool AI Agent.
+            All rights reserved.
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
