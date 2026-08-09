@@ -24,6 +24,7 @@ A simple and interactive AI-powered Single Tool Agent built with Python. The app
 
 📂 Project Structure
 
+```text
 Single-Tool-Agent/
 │
 ├── agent.py
@@ -41,6 +42,7 @@ Single-Tool-Agent/
 │
 ├── .gitignore
 └── README.md
+```
 
 🚀 Getting Started
 
